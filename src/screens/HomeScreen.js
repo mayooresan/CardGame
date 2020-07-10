@@ -4,20 +4,21 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
+import CAColors from '../res/CAColors';
+import CAStrings from '../res/CAStrings';
 
 const HomeScreen = () => {
     return(
         <SafeAreaView>
-            <Text>Test is the test tests </Text>
+            <Text>{CAStrings.TEST_STRING}</Text>
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     scrollView: {
-      backgroundColor: '#fff',
+      backgroundColor: CAColors.BG_WHITE,
     },
-  });
+});
   
-
 export default HomeScreen
