@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -8,6 +8,11 @@ import CAColors from '../res/CAColors';
 import CAStrings from '../res/CAStrings';
 
 const HomeScreen = () => {
+
+    useEffect(() => {
+       
+    }, [])
+
     return(
         <SafeAreaView>
             <Text>{CAStrings.TEST_STRING}</Text>
