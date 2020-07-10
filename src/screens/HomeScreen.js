@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import CAColors from '../res/CAColors';
 import CAStrings from '../res/CAStrings';
+import CAStyles from '../res/CAStyles';
 
 const HomeScreen = () => {
 
@@ -17,7 +18,7 @@ const HomeScreen = () => {
 
     return(
         <SafeAreaView style={styles.parentContainer}>
-            <View style={{justifyContent:'center', alignItems:'center', flexDirection:'row'}}>
+            <View style={CAStyles.ALIGN_CENTER_ROW}>
                 <Button title="Reset" style={{width:'20%'}}/>
                 <View style={{width:'60%'}}/>
                 <View style={{justifyContent:'center', alignItems:'center', flexDirection:'row', width:'20%'}}>
