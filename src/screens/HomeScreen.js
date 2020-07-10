@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -11,20 +11,32 @@ import CAStrings from '../res/CAStrings';
 import CAStyles from '../res/CAStyles';
 
 const HomeScreen = () => {
+   const [steps, setSteps] = useState(0)
 
     useEffect(() => {
        
     }, [])
 
+    resetSteps = () => {
+        setSteps(0)
+    }
+
     return(
         <SafeAreaView style={styles.parentContainer}>
             <View style={CAStyles.ALIGN_CENTER_ROW}>
-                <Button title="Reset" style={{width:'20%'}}/>
+                <Button title="Reset" 
+                        style={{width:'20%'}}
+                        onPress={resetSteps}
+                    />
                 <View style={{width:'60%'}}/>
-                <View style={{justifyContent:'center', alignItems:'center', flexDirection:'row', width:'20%'}}>
+                <View style={[CAStyles.ALIGN_CENTER_ROW, {width:'20%'}]}>
                     <Text>STEPS:</Text>
-                    <Text>0</Text>
+                    <Text>{steps}</Text>
                 </View> 
+            </View>
+
+            <View style={{backgroundColor:CAColors.BLUE}}>
+                <Text style={{color:CAColors.WHITE}}>?</Text>
             </View>
             <Text>{CAStrings.TEST_STRING}</Text>
         </SafeAreaView>
