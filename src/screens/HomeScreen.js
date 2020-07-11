@@ -12,70 +12,41 @@ import CAColors from '../res/CAColors';
 import CAStrings from '../res/CAStrings';
 import CAStyles from '../res/CAStyles';
 import CACard from '../components/CACard'
-
-const DATA = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: '?',
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: '?',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: '?',
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: '?',
-      },
-      {
-        id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-        title: '?',
-      },
-      {
-        id: '58694a0f-3da1-471f-bd96-145571e29d72',
-        title: '?',
-      },
-      {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: '?',
-      },
-      {
-        id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-        title: '?',
-      },
-      {
-        id: '58694a0f-3da1-471f-bd96-145571e29d72',
-        title: '?',
-      },
-      {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: '?',
-      },
-      {
-        id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-        title: '?',
-      },
-      {
-        id: '58694a0f-3da1-471f-bd96-145571e29d72',
-        title: '?',
-      },
-
-  ];
-  
-  
-
+import { shuffle } from '../Utils/SupportFun';
 
 const HomeScreen = () => {
    const [steps, setSteps] = useState(0)
    const screenWidth = Math.round(Dimensions.get('window').width) - 48;
    const screenHeight = Math.round(Dimensions.get('window').height) - 160;
 
+   const CARD_PAIRS_VALUE = [1,2,3,4,5,6]
+   const [cardNumbers, setCardNumbers] = useState([])
+
     useEffect(() => {
-       console.log(screenWidth)
+
+        let mergedArray = CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE)
+        console.log(mergedArray)
+        let shuffledArray = shuffle(mergedArray)
+        console.log(shuffledArray)
+        setupData(shuffledArray)
     }, [])
+
+    setupData = (shuffledArray) => {
+      let dataArray = []
+      shuffledArray.map((number, index)=>{
+        let data = {
+          value: number,
+          id:index,
+          flipped:false,
+          matched:false,
+        }
+        dataArray.push(data)
+      })
+      
+      setCardNumbers(dataArray)
+      // alert(cardNumbers.length)
+      // console.log(dataArray)
+    }
 
     resetSteps = () => {
         setSteps(0)
@@ -86,7 +57,7 @@ const HomeScreen = () => {
     }
 
     const renderItem = ({ item }) => (
-        <CACard title={item.title} 
+        <CACard title={item.value} 
                 width={screenWidth/3} 
                 height={screenHeight/4} 
                 cardTouched={()=>{cardTouched(item)}}/>
@@ -107,7 +78,7 @@ const HomeScreen = () => {
             </View>
 
             <FlatList
-                data={DATA}
+                data={cardNumbers}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 numColumns={3}
