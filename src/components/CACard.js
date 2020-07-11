@@ -18,10 +18,11 @@ const CACard = (props ) => {
 
   flipCard = () => {
     setFlipped(!flipped)
+    props.cardTouched()
   }
 
   return (
-    <TouchableOpacity onPress={props.cardTouched, flipCard}>
+    <TouchableOpacity onPress={flipCard}>
         <View style={[styles.cardContainer, CAStyles.ALIGN_CENTER]} width={props.width} height={props.height} backgroundColor={getBackgroundColor()}>
           
           {
@@ -37,7 +38,7 @@ const CACard = (props ) => {
               
             )
           }
-          
+
         </View>
     </TouchableOpacity>
   )
