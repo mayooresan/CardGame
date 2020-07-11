@@ -81,8 +81,15 @@ const HomeScreen = () => {
         setSteps(0)
     }
 
+    cardTouched = (item) => {
+        alert(item.title)
+    }
+
     const renderItem = ({ item }) => (
-        <CACard title={item.title} width={screenWidth/3} height={screenHeight/4}/>
+        <CACard title={item.title} 
+                width={screenWidth/3} 
+                height={screenHeight/4} 
+                cardTouched={()=>{cardTouched(item)}}/>
     );
 
     return(
