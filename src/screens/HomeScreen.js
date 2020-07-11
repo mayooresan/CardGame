@@ -11,6 +11,7 @@ import {
 import CAColors from '../res/CAColors';
 import CAStrings from '../res/CAStrings';
 import CAStyles from '../res/CAStyles';
+import CACard from '../components/CACard'
 
 const DATA = [
     {
@@ -64,11 +65,7 @@ const DATA = [
 
   ];
   
-  const Item = (props ) => (
-    <View style={[{ backgroundColor: '#f9c2ff', height:100, margin:8}, CAStyles.ALIGN_CENTER_ROW]} width={props.width}>
-      <Text style={styles.title}>{props.title}</Text>
-    </View>
-  );
+  
 
 
 const HomeScreen = () => {
@@ -84,7 +81,7 @@ const HomeScreen = () => {
     }
 
     const renderItem = ({ item }) => (
-        <Item title={item.title} width={screenWidth/3}/>
+        <CACard title={item.title} width={screenWidth/3}/>
     );
 
     return(
@@ -116,14 +113,7 @@ const styles = StyleSheet.create({
     parentContainer: {
       backgroundColor: CAColors.BG_WHITE,
       flex:1
-    },item: {
-        backgroundColor: '#f9c2ff',
-        height:100,
-        margin:8,
-      },
-      title: {
-        fontSize: 32,
-      },
+    }
 });
   
 export default HomeScreen
