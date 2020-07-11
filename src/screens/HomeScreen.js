@@ -71,6 +71,7 @@ const DATA = [
 const HomeScreen = () => {
    const [steps, setSteps] = useState(0)
    const screenWidth = Math.round(Dimensions.get('window').width) - 48;
+   const screenHeight = Math.round(Dimensions.get('window').height) - 160;
 
     useEffect(() => {
        console.log(screenWidth)
@@ -81,7 +82,7 @@ const HomeScreen = () => {
     }
 
     const renderItem = ({ item }) => (
-        <CACard title={item.title} width={screenWidth/3}/>
+        <CACard title={item.title} width={screenWidth/3} height={screenHeight/4}/>
     );
 
     return(
@@ -104,7 +105,6 @@ const HomeScreen = () => {
                 keyExtractor={item => item.id}
                 numColumns={3}
             />
-            <Text>{CAStrings.TEST_STRING}</Text>
         </SafeAreaView>
     )
 }

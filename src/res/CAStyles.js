@@ -5,5 +5,8 @@ export default CLStyles = StyleSheet.create({
         justifyContent:'center', 
         alignItems:'center', 
         flexDirection:'row'
+    }, ALIGN_CENTER: {
+        justifyContent:'center', 
+        alignItems:'center', 
     }
 });
