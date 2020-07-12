@@ -2,28 +2,30 @@ import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  Text,
-  View,
-  Button,
   FlatList,
   Dimensions,
   Alert
 } from 'react-native';
 import CAColors from '../res/CAColors';
 import CAStrings from '../res/CAStrings';
-import CAStyles from '../res/CAStyles';
 import CACard from '../components/CACard'
 import { shuffle, createArrayOfNumbers } from '../Utils/SupportFun';
 import CAHeader from '../components/CAHeader';
 
 const HomeScreen = () => {
+  //this will be used to decide the hard height / width based on screen size
    const screenWidth = Math.round(Dimensions.get('window').width) - 48;
    const screenHeight = Math.round(Dimensions.get('window').height) - 160;
 
+   //unique number array
    const CARD_PAIRS_VALUE = createArrayOfNumbers()
+   //unique number array duplicated and shuffled here
    const [cardNumbers, setCardNumbers] = useState([])
+   //number of steps
    const [steps, setSteps] = useState(0)
+   //number of cards flipped at a given time
    const [flipCount, setFlipCount] = useState(0)
+   //details of the cards that are flipped
    const [firstFlippedCard, setFirstFlippedCard] = useState(null)
    const [secondFlippedCard, setSecondFlippedCard] = useState(null)
 
@@ -51,7 +53,6 @@ const HomeScreen = () => {
           value: number,
           id:index,
           flipped:false,
-          matched:false,
         }
         dataArray.push(data)
       })
