@@ -9,7 +9,7 @@ import {
 import CAColors from '../res/CAColors';
 import CAStrings from '../res/CAStrings';
 import CACard from '../components/CACard'
-import { shuffle, createArrayOfNumbers, mergeTwoArrays, checkWhetherAllCardsMatched } from '../Utils/SupportFun';
+import { shuffle, createArrayOfNumbers, mergeTwoArrays, checkWhetherAllCardsMatched, arrayToDataArray } from '../Utils/SupportFun';
 import CAHeader from '../components/CAHeader';
 
 const HomeScreen = () => {
@@ -47,16 +47,7 @@ const HomeScreen = () => {
     }
 
     setupData = (shuffledArray) => {
-      let dataArray = []
-      shuffledArray.map((number, index)=>{
-        let data = {
-          value: number,
-          id:index,
-          flipped:false,
-        }
-        dataArray.push(data)
-      })
-      
+      dataArray = arrayToDataArray(shuffledArray)
       setCardNumbers(dataArray)
     }
 

@@ -56,3 +56,17 @@ export const checkWhetherAllCardsMatched = (cardNumbers) => {
 
     return isAllMatched
 }
+
+export const arrayToDataArray = (shuffledArray) => {
+    let dataArray = []
+      shuffledArray.map((number, index)=>{
+        let data = {
+          value: number,
+          id:index,
+          flipped:false,
+        }
+        dataArray.push(data)
+      })
+
+    return dataArray;
+}
