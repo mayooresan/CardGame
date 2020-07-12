@@ -35,8 +35,7 @@ const HomeScreen = () => {
      if(flipCount > 1) {
         checkMatchedCards()
      }
-
-    }, [firstFlippedCard, secondFlippedCard, flipCount])
+    }, [flipCount])
 
     shuffleCards = () => {
       let mergedArray = CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE)
@@ -75,7 +74,7 @@ const HomeScreen = () => {
         if (checkWhetherAllCardsMatched()) {
           Alert.alert(
             "WON",
-            `Congratulations on winding the game with just ${steps} steps`,
+            `${CAStrings.CONGRATULATION_TEXT} ${steps} ${CAStrings.STEPS}`,
             [
               {
                 text: "Play Again",
