@@ -14,6 +14,7 @@ import CAStrings from '../res/CAStrings';
 import CAStyles from '../res/CAStyles';
 import CACard from '../components/CACard'
 import { shuffle, createArrayOfNumbers } from '../Utils/SupportFun';
+import CAHeader from '../components/CAHeader';
 
 const HomeScreen = () => {
    const screenWidth = Math.round(Dimensions.get('window').width) - 48;
@@ -154,17 +155,7 @@ const HomeScreen = () => {
 
     return(
         <SafeAreaView style={styles.parentContainer}>
-            <View style={CAStyles.ALIGN_CENTER_ROW}>
-                <Button title="Reset" 
-                        style={{width:'20%'}}
-                        onPress={resetSteps}
-                    />
-                <View style={{width:'60%'}}/>
-                <View style={[CAStyles.ALIGN_CENTER_ROW, {width:'20%'}]}>
-                    <Text>STEPS:</Text>
-                    <Text>{steps}</Text>
-                </View> 
-            </View>
+           <CAHeader steps={steps} onPress={resetSteps}/>
 
             <FlatList
                 data={cardNumbers}
