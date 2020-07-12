@@ -17,7 +17,7 @@ const CACard = (props ) => {
   }
 
   flipCard = () => {
-    setFlipped(!flipped)
+    //setFlipped(!flipped)
     props.cardTouched()
   }
 
@@ -26,7 +26,7 @@ const CACard = (props ) => {
         <View style={[styles.cardContainer, CAStyles.ALIGN_CENTER]} width={props.width} height={props.height} backgroundColor={getBackgroundColor()}>
           
           {
-            flipped ? (
+            props.flipped ? (
               <Text style={styles.textStyle}>{props.title}</Text>
             ) : (
               <Image
