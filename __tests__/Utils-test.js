@@ -36,3 +36,30 @@ it('createArrayOfNumbers test whether numbers outside 100 or below 0', async() =
 it('createArrayOfNumbers test number of elements', async() => {
     expect(createArrayOfNumbers()).toHaveLength(6)
 });
+
+it('createArrayOfNumbers test elements range of 0-100', async() => {
+    let sampleArray =  createArrayOfNumbers()
+    expect(sampleArray[0] >= 0).toBeTruthy();
+    expect(sampleArray[0] <=100).toBeTruthy();
+
+    expect(sampleArray[1] >= 0).toBeTruthy();
+    expect(sampleArray[1] <=100).toBeTruthy();
+
+    expect(sampleArray[2] >= 0).toBeTruthy();
+    expect(sampleArray[2] <=100).toBeTruthy();
+
+    expect(sampleArray[3] >= 0).toBeTruthy();
+    expect(sampleArray[3] <=100).toBeTruthy();
+
+    expect(sampleArray[4] >= 0).toBeTruthy();
+    expect(sampleArray[4] <=100).toBeTruthy();
+
+    expect(sampleArray[5] >= 0).toBeTruthy();
+    expect(sampleArray[5] <=100).toBeTruthy();
+});
+
+it('createArrayOfNumbers test array is unique', async() => {
+    let sampleArray =  createArrayOfNumbers()
+    const isArrayUnique = arr => Array.isArray(arr) && new Set(arr).size === arr.length; // add function to check that array is unique.
+    expect(isArrayUnique(sampleArray)).toBeTruthy();
+});
