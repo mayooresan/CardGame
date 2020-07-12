@@ -7,11 +7,9 @@
  */
 
 import React from 'react';
-import HomeScreen from './src/screens/HomeScreen'
+import HomeScreen from './src/screens/HomeScreen';
 
 const App: () => React$Node = () => {
-  return (
-      <HomeScreen/>
-  );
+  return <HomeScreen />;
 };
 export default App;
