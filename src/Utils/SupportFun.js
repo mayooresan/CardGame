@@ -40,3 +40,33 @@ export const createArrayOfNumbers = () => {
 getRandomNumber = () => {
     return Math.floor((Math.random() * 100) + 1);
 }
+
+export const mergeTwoArrays = (arrayOne, ArrayTwo) => {
+    let mergedArray = arrayOne.concat(ArrayTwo)
+    return mergedArray
+}
+
+export const checkWhetherAllCardsMatched = (cardNumbers) => {
+    let isAllMatched = true
+    cardNumbers.map((cardItem)=>{
+      if(cardItem.flipped === false) {
+        isAllMatched = false
+      }
+    })
+
+    return isAllMatched
+}
+
+export const arrayToDataArray = (shuffledArray) => {
+    let dataArray = []
+      shuffledArray.map((number, index)=>{
+        let data = {
+          value: number,
+          id:index,
+          flipped:false,
+        }
+        dataArray.push(data)
+      })
+
+    return dataArray;
+}

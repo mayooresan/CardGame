@@ -9,7 +9,7 @@ import {
 import CAColors from '../res/CAColors';
 import CAStrings from '../res/CAStrings';
 import CACard from '../components/CACard'
-import { shuffle, createArrayOfNumbers } from '../Utils/SupportFun';
+import { shuffle, createArrayOfNumbers, mergeTwoArrays, checkWhetherAllCardsMatched, arrayToDataArray } from '../Utils/SupportFun';
 import CAHeader from '../components/CAHeader';
 
 const HomeScreen = () => {
@@ -41,22 +41,13 @@ const HomeScreen = () => {
     }, [flipCount])
 
     shuffleCards = () => {
-      let mergedArray = CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE)
+      let mergedArray = mergeTwoArrays(CARD_PAIRS_VALUE, CARD_PAIRS_VALUE)
       let shuffledArray = shuffle(mergedArray)
       setupData(shuffledArray)
     }
 
     setupData = (shuffledArray) => {
-      let dataArray = []
-      shuffledArray.map((number, index)=>{
-        let data = {
-          value: number,
-          id:index,
-          flipped:false,
-        }
-        dataArray.push(data)
-      })
-      
+      dataArray = arrayToDataArray(shuffledArray)
       setCardNumbers(dataArray)
     }
 
@@ -73,7 +64,7 @@ const HomeScreen = () => {
       if (firstFlippedCard.value === secondFlippedCard.value) {
         setFlipCount(0)
         //check whether all matched
-        if (checkWhetherAllCardsMatched()) {
+        if (checkWhetherAllCardsMatched(cardNumbers)) {
           Alert.alert(
             "WON",
             `${CAStrings.CONGRATULATION_TEXT} ${steps} ${CAStrings.STEPS}`,
@@ -107,16 +98,16 @@ const HomeScreen = () => {
       setFlipCount(0)
     }
 
-    checkWhetherAllCardsMatched = () => {
-      let isAllMatched = true
-      cardNumbers.map((cardItem)=>{
-        if(cardItem.flipped === false) {
-          isAllMatched = false
-        }
-      })
+    // checkWhetherAllCardsMatched = () => {
+    //   let isAllMatched = true
+    //   cardNumbers.map((cardItem)=>{
+    //     if(cardItem.flipped === false) {
+    //       isAllMatched = false
+    //     }
+    //   })
 
-      return isAllMatched
-    }
+    //   return isAllMatched
+    // }
 
     cardTouched = async(item) => {
       if(flipCount > 1) {
