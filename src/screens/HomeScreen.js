@@ -15,20 +15,29 @@ import CACard from '../components/CACard'
 import { shuffle } from '../Utils/SupportFun';
 
 const HomeScreen = () => {
-   const [steps, setSteps] = useState(0)
    const screenWidth = Math.round(Dimensions.get('window').width) - 48;
    const screenHeight = Math.round(Dimensions.get('window').height) - 160;
 
    const CARD_PAIRS_VALUE = [1,2,3,4,5,6]
    const [cardNumbers, setCardNumbers] = useState([])
+   const [steps, setSteps] = useState(0)
+   const [flipCount, setFlipCount] = useState(0)
+   const [firstFlippedCard, setFirstFlippedCard] = useState(null)
+   const [secondFlippedCard, setSecondFlippedCard] = useState(null)
+
 
     useEffect(() => {
         shuffleCards()
     }, [])
 
     useEffect(() => {
-     console.log("useEffect", cardNumbers)
-    }, [cardNumbers])
+     console.log("firstFlippedCard", firstFlippedCard)
+     console.log("secondFlippedCard", secondFlippedCard)
+     if(flipCount > 1) {
+        checkMatchedCards()
+     }
+
+    }, [firstFlippedCard, secondFlippedCard, flipCount])
 
     shuffleCards = () => {
       let mergedArray = CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE)
@@ -52,12 +61,39 @@ const HomeScreen = () => {
     }
 
     resetSteps = () => {
+        //reset count
         setSteps(0)
         //reset cards
         shuffleCards()
+        //reset flip count
+        setFlipCount(0)
+    }
+
+    checkMatchedCards = () => {
+      if (firstFlippedCard.value === secondFlippedCard.value) {
+        alert("matched")
+      } else {
+        setTimeout(() => {
+          flipCardsAsNotMatched()
+        }, 1000);
+      }
+    }
+
+    flipCardsAsNotMatched = () => {
+      let newArray = [...cardNumbers]
+      newArray.map((cardItem)=>{
+        cardItem.flipped = false
+      })
+
+      setCardNumbers(newArray)
+      setFlipCount(0)
     }
 
     cardTouched = async(item) => {
+      if(flipCount > 1) {
+        return
+      }
+
       //flip logic
       let newItem = item
       newItem.flipped = true
@@ -67,6 +103,18 @@ const HomeScreen = () => {
 
       //count logic
       setSteps(steps + 1)
+
+      //match logic
+      setFlipCount(flipCount + 1)
+      if (flipCount == 0) {
+        setFirstFlippedCard(newItem)
+      }
+
+      if (flipCount === 1) {
+        setSecondFlippedCard(newItem)
+      }
+
+
     }
 
     const renderItem = ({ item }) => (
