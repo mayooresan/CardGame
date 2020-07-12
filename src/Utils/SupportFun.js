@@ -45,3 +45,14 @@ export const mergeTwoArrays = (arrayOne, ArrayTwo) => {
     let mergedArray = arrayOne.concat(ArrayTwo)
     return mergedArray
 }
+
+export const checkWhetherAllCardsMatched = (cardNumbers) => {
+    let isAllMatched = true
+    cardNumbers.map((cardItem)=>{
+      if(cardItem.flipped === false) {
+        isAllMatched = false
+      }
+    })
+
+    return isAllMatched
+}

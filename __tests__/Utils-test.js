@@ -4,7 +4,7 @@
 
 import 'react-native';
 import React from 'react';
-import {shuffle, createArrayOfNumbers} from '../src/Utils/SupportFun'
+import {shuffle, createArrayOfNumbers, mergeTwoArrays, checkWhetherAllCardsMatched} from '../src/Utils/SupportFun'
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
@@ -62,4 +62,66 @@ it('createArrayOfNumbers test array is unique', async() => {
     let sampleArray =  createArrayOfNumbers()
     const isArrayUnique = arr => Array.isArray(arr) && new Set(arr).size === arr.length; // add function to check that array is unique.
     expect(isArrayUnique(sampleArray)).toBeTruthy();
+});
+
+it('mergeTwoArrays test number of elements after merge', async() => {
+    let arrayOne = createArrayOfNumbers()
+    let arrayTwo = createArrayOfNumbers()
+
+    expect(mergeTwoArrays(arrayOne, arrayTwo)).toHaveLength(12)
+});
+
+/*
+checkWhetherAllCardsMatched
+ let data = {
+          value: number,
+          id:index,
+          flipped:false,
+        }
+*/
+
+it('checkWhetherAllCardsMatched test array false', async() => {
+    let sampleArray =  [{
+        value: 1,
+        id:0,
+        flipped:false,
+      },
+      {
+        value: 1,
+        id:1,
+        flipped:false,
+      }]
+    
+    expect(checkWhetherAllCardsMatched(sampleArray)).toBeFalsy();
+});
+
+it('checkWhetherAllCardsMatched test array one element only false', async() => {
+    let sampleArray =  [{
+        value: 1,
+        id:0,
+        flipped:false,
+      },
+      {
+        value: 1,
+        id:1,
+        flipped:true,
+      }]
+    
+    expect(checkWhetherAllCardsMatched(sampleArray)).toBeFalsy();
+});
+
+
+it('checkWhetherAllCardsMatched test array true', async() => {
+    let sampleArray =  [{
+        value: 1,
+        id:0,
+        flipped:true,
+      },
+      {
+        value: 1,
+        id:1,
+        flipped:true,
+      }]
+    
+    expect(checkWhetherAllCardsMatched(sampleArray)).toBeTruthy();
 });

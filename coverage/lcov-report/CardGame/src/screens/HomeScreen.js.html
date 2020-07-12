@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30.43% </span>
+                <span class="strong">31.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>21/69</span>
+                <span class='fraction'>20/63</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.56% </span>
+                <span class="strong">6.25% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/18</span>
+                <span class='fraction'>1/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30.43% </span>
+                <span class="strong">31.75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>21/69</span>
+                <span class='fraction'>20/63</span>
             </div>
         
             
@@ -343,15 +343,15 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -422,7 +422,7 @@ import {
 import CAColors from '../res/CAColors';
 import CAStrings from '../res/CAStrings';
 import CACard from '../components/CACard'
-import { shuffle, createArrayOfNumbers } from '../Utils/SupportFun';
+import { shuffle, createArrayOfNumbers, mergeTwoArrays, checkWhetherAllCardsMatched } from '../Utils/SupportFun';
 import CAHeader from '../components/CAHeader';
 &nbsp;
 const HomeScreen = () =&gt; {
@@ -454,7 +454,7 @@ const HomeScreen = () =&gt; {
     }, [flipCount])
 &nbsp;
     shuffleCards = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-      let mergedArray = <span class="cstat-no" title="statement not covered" >CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE)</span>
+      let mergedArray = <span class="cstat-no" title="statement not covered" >mergeTwoArrays(CARD_PAIRS_VALUE, CARD_PAIRS_VALUE)</span>
       let shuffledArray = <span class="cstat-no" title="statement not covered" >shuffle(mergedArray)</span>
 <span class="cstat-no" title="statement not covered" >      setupData(shuffledArray)</span>
     }
@@ -486,7 +486,7 @@ const HomeScreen = () =&gt; {
 <span class="cstat-no" title="statement not covered" >      if (firstFlippedCard.value === secondFlippedCard.value) {</span>
 <span class="cstat-no" title="statement not covered" >        setFlipCount(0)</span>
         //check whether all matched
-<span class="cstat-no" title="statement not covered" >        if (checkWhetherAllCardsMatched()) {</span>
+<span class="cstat-no" title="statement not covered" >        if (checkWhetherAllCardsMatched(cardNumbers)) {</span>
 <span class="cstat-no" title="statement not covered" >          Alert.alert(</span>
             "WON",
             `${CAStrings.CONGRATULATION_TEXT} ${steps} ${CAStrings.STEPS}`,
@@ -520,16 +520,16 @@ const HomeScreen = () =&gt; {
 <span class="cstat-no" title="statement not covered" >      setFlipCount(0)</span>
     }
 &nbsp;
-    checkWhetherAllCardsMatched = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-      let isAllMatched = <span class="cstat-no" title="statement not covered" >true</span>
-<span class="cstat-no" title="statement not covered" >      cardNumbers.map(<span class="fstat-no" title="function not covered" >(c</span>ardItem)=&gt;{</span>
-<span class="cstat-no" title="statement not covered" >        if(cardItem.flipped === false) {</span>
-<span class="cstat-no" title="statement not covered" >          isAllMatched = false</span>
-        }
-      })
+    // checkWhetherAllCardsMatched = () =&gt; {
+    //   let isAllMatched = true
+    //   cardNumbers.map((cardItem)=&gt;{
+    //     if(cardItem.flipped === false) {
+    //       isAllMatched = false
+    //     }
+    //   })
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      return isAllMatched</span>
-    }
+    //   return isAllMatched
+    // }
 &nbsp;
     cardTouched = <span class="fstat-no" title="function not covered" >as</span>ync(item) =&gt; {
 <span class="cstat-no" title="statement not covered" >      if(flipCount &gt; 1) {</span>
@@ -595,7 +595,7 @@ export default HomeScreen</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Jul 12 2020 21:00:53 GMT+0800 (Singapore Standard Time)
+                at Mon Jul 13 2020 00:46:33 GMT+0800 (Singapore Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
