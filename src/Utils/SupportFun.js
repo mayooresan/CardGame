@@ -15,4 +15,29 @@ export const shuffle = (array) => {
     }
   
     return array;
-  }
+}
+
+export const createArrayOfNumbers = () => {
+    let numbersArray = []
+    
+
+    while (numbersArray.length < 6) {
+        let randomNum = getRandomNumber()
+        //check whether number already exist
+        isFound = false
+        numbersArray.map((value)=>{
+            if (value === randomNum) {
+                isFound = true
+            }
+        })
+        if (isFound === false) {
+            numbersArray.push(randomNum)
+        }
+    }
+
+    return numbersArray
+}
+
+getRandomNumber = () => {
+    return Math.floor((Math.random() * 100) + 1);
+}
