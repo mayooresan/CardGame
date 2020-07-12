@@ -71,8 +71,13 @@ const HomeScreen = () => {
 
     checkMatchedCards = () => {
       if (firstFlippedCard.value === secondFlippedCard.value) {
-        alert("matched")
+        setFlipCount(0)
+        //check whether all matched
+        if (checkWhetherAllCardsMatched()) {
+          alert("Congratulations you've won")
+        }
       } else {
+        //flip back timer
         setTimeout(() => {
           flipCardsAsNotMatched()
         }, 1000);
@@ -87,6 +92,17 @@ const HomeScreen = () => {
 
       setCardNumbers(newArray)
       setFlipCount(0)
+    }
+
+    checkWhetherAllCardsMatched = () => {
+      let isAllMatched = true
+      cardNumbers.map((cardItem)=>{
+        if(cardItem.flipped === false) {
+          isAllMatched = false
+        }
+      })
+
+      return isAllMatched
     }
 
     cardTouched = async(item) => {
