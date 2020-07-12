@@ -9,7 +9,7 @@ import {
 import CAColors from '../res/CAColors';
 import CAStrings from '../res/CAStrings';
 import CACard from '../components/CACard'
-import { shuffle, createArrayOfNumbers } from '../Utils/SupportFun';
+import { shuffle, createArrayOfNumbers, mergeTwoArrays } from '../Utils/SupportFun';
 import CAHeader from '../components/CAHeader';
 
 const HomeScreen = () => {
@@ -41,7 +41,7 @@ const HomeScreen = () => {
     }, [flipCount])
 
     shuffleCards = () => {
-      let mergedArray = CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE)
+      let mergedArray = mergeTwoArrays(CARD_PAIRS_VALUE, CARD_PAIRS_VALUE)
       let shuffledArray = shuffle(mergedArray)
       setupData(shuffledArray)
     }

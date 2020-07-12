@@ -40,3 +40,8 @@ export const createArrayOfNumbers = () => {
 getRandomNumber = () => {
     return Math.floor((Math.random() * 100) + 1);
 }
+
+export const mergeTwoArrays = (arrayOne, ArrayTwo) => {
+    let mergedArray = arrayOne.concat(ArrayTwo)
+    return mergedArray
+}
