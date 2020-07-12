@@ -13,13 +13,14 @@ import CAColors from '../res/CAColors';
 import CAStrings from '../res/CAStrings';
 import CAStyles from '../res/CAStyles';
 import CACard from '../components/CACard'
-import { shuffle } from '../Utils/SupportFun';
+import { shuffle, createArrayOfNumbers } from '../Utils/SupportFun';
+import CAHeader from '../components/CAHeader';
 
 const HomeScreen = () => {
    const screenWidth = Math.round(Dimensions.get('window').width) - 48;
    const screenHeight = Math.round(Dimensions.get('window').height) - 160;
 
-   const CARD_PAIRS_VALUE = [1,2,3,4,5,6]
+   const CARD_PAIRS_VALUE = createArrayOfNumbers()
    const [cardNumbers, setCardNumbers] = useState([])
    const [steps, setSteps] = useState(0)
    const [flipCount, setFlipCount] = useState(0)
@@ -32,13 +33,10 @@ const HomeScreen = () => {
     }, [])
 
     useEffect(() => {
-     console.log("firstFlippedCard", firstFlippedCard)
-     console.log("secondFlippedCard", secondFlippedCard)
      if(flipCount > 1) {
         checkMatchedCards()
      }
-
-    }, [firstFlippedCard, secondFlippedCard, flipCount])
+    }, [flipCount])
 
     shuffleCards = () => {
       let mergedArray = CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE)
@@ -77,7 +75,7 @@ const HomeScreen = () => {
         if (checkWhetherAllCardsMatched()) {
           Alert.alert(
             "WON",
-            `Congratulations on winding the game with just ${steps} steps`,
+            `${CAStrings.CONGRATULATION_TEXT} ${steps} ${CAStrings.STEPS}`,
             [
               {
                 text: "Play Again",
@@ -157,17 +155,7 @@ const HomeScreen = () => {
 
     return(
         <SafeAreaView style={styles.parentContainer}>
-            <View style={CAStyles.ALIGN_CENTER_ROW}>
-                <Button title="Reset" 
-                        style={{width:'20%'}}
-                        onPress={resetSteps}
-                    />
-                <View style={{width:'60%'}}/>
-                <View style={[CAStyles.ALIGN_CENTER_ROW, {width:'20%'}]}>
-                    <Text>STEPS:</Text>
-                    <Text>{steps}</Text>
-                </View> 
-            </View>
+           <CAHeader steps={steps} onPress={resetSteps}/>
 
             <FlatList
                 data={cardNumbers}
