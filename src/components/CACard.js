@@ -11,7 +11,6 @@ import CAImages from '../res/CAImages';
 import CAColors from '../res/CAColors';
 
 const CACard = (props ) => {
-  const [flipped, setFlipped] = useState(false)
 
   return (
     <TouchableOpacity onPress={props.cardTouched}>

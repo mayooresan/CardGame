@@ -1,12 +1,18 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import CAStyles from '../res/CAStyles'
+import CAColors from '../res/CAColors'
 
-const CALinkButton = () => {
+const CALinkButton = (props) => {
     return (
-        <View>
-            <Text></Text>
-        </View>
+        <TouchableOpacity onPress={props.onPress}>
+            <Text style={styles.textStyle}>{props.title}</Text>
+        </TouchableOpacity>
     )
 }
+
+const styles = StyleSheet.create({
+    textStyle: {color:CAColors.LINK_COLOR, fontSize:20}
+});
 
 export default CALinkButton
