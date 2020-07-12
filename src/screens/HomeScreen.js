@@ -23,15 +23,18 @@ const HomeScreen = () => {
    const [cardNumbers, setCardNumbers] = useState([])
 
     useEffect(() => {
-        let mergedArray = CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE)
-        let shuffledArray = shuffle(mergedArray)
-        setupData(shuffledArray)
-
+        shuffleCards()
     }, [])
 
     useEffect(() => {
      console.log("useEffect", cardNumbers)
     }, [cardNumbers])
+
+    shuffleCards = () => {
+      let mergedArray = CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE)
+      let shuffledArray = shuffle(mergedArray)
+      setupData(shuffledArray)
+    }
 
     setupData = (shuffledArray) => {
       let dataArray = []
@@ -50,14 +53,20 @@ const HomeScreen = () => {
 
     resetSteps = () => {
         setSteps(0)
+        //reset cards
+        shuffleCards()
     }
 
     cardTouched = async(item) => {
+      //flip logic
       let newItem = item
       newItem.flipped = true
       let newArray = [...cardNumbers]
       newArray[item.id] = newItem
       setCardNumbers(newArray)
+
+      //count logic
+      setSteps(steps + 1)
     }
 
     const renderItem = ({ item }) => (
