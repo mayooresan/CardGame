@@ -6,7 +6,8 @@ import {
   View,
   Button,
   FlatList,
-  Dimensions
+  Dimensions,
+  Alert
 } from 'react-native';
 import CAColors from '../res/CAColors';
 import CAStrings from '../res/CAStrings';
@@ -15,23 +16,35 @@ import CACard from '../components/CACard'
 import { shuffle } from '../Utils/SupportFun';
 
 const HomeScreen = () => {
-   const [steps, setSteps] = useState(0)
    const screenWidth = Math.round(Dimensions.get('window').width) - 48;
    const screenHeight = Math.round(Dimensions.get('window').height) - 160;
 
    const CARD_PAIRS_VALUE = [1,2,3,4,5,6]
    const [cardNumbers, setCardNumbers] = useState([])
+   const [steps, setSteps] = useState(0)
+   const [flipCount, setFlipCount] = useState(0)
+   const [firstFlippedCard, setFirstFlippedCard] = useState(null)
+   const [secondFlippedCard, setSecondFlippedCard] = useState(null)
+
 
     useEffect(() => {
-        let mergedArray = CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE)
-        let shuffledArray = shuffle(mergedArray)
-        setupData(shuffledArray)
-
+        shuffleCards()
     }, [])
 
     useEffect(() => {
-     console.log("useEffect", cardNumbers)
-    }, [cardNumbers])
+     console.log("firstFlippedCard", firstFlippedCard)
+     console.log("secondFlippedCard", secondFlippedCard)
+     if(flipCount > 1) {
+        checkMatchedCards()
+     }
+
+    }, [firstFlippedCard, secondFlippedCard, flipCount])
+
+    shuffleCards = () => {
+      let mergedArray = CARD_PAIRS_VALUE.concat(CARD_PAIRS_VALUE)
+      let shuffledArray = shuffle(mergedArray)
+      setupData(shuffledArray)
+    }
 
     setupData = (shuffledArray) => {
       let dataArray = []
@@ -49,15 +62,89 @@ const HomeScreen = () => {
     }
 
     resetSteps = () => {
+        //reset count
         setSteps(0)
+        //reset cards
+        shuffleCards()
+        //reset flip count
+        setFlipCount(0)
+    }
+
+    checkMatchedCards = () => {
+      if (firstFlippedCard.value === secondFlippedCard.value) {
+        setFlipCount(0)
+        //check whether all matched
+        if (checkWhetherAllCardsMatched()) {
+          Alert.alert(
+            "WON",
+            `Congratulations on winding the game with just ${steps} steps`,
+            [
+              {
+                text: "Play Again",
+                onPress: () => resetSteps()
+              }
+            ],
+            { cancelable: false }
+          );
+        }
+      } else {
+        //flip back timer
+        setTimeout(() => {
+          flipCardsAsNotMatched()
+        }, 1000);
+      }
+    }
+
+    flipCardsAsNotMatched = () => {
+      let newArray = [...cardNumbers]
+      newArray.map((cardItem)=>{
+        if (firstFlippedCard.id === cardItem.id || secondFlippedCard.id === cardItem.id) {
+          cardItem.flipped = false
+        }
+        
+      })
+
+      setCardNumbers(newArray)
+      setFlipCount(0)
+    }
+
+    checkWhetherAllCardsMatched = () => {
+      let isAllMatched = true
+      cardNumbers.map((cardItem)=>{
+        if(cardItem.flipped === false) {
+          isAllMatched = false
+        }
+      })
+
+      return isAllMatched
     }
 
     cardTouched = async(item) => {
+      if(flipCount > 1) {
+        return
+      }
+
+      //flip logic
       let newItem = item
       newItem.flipped = true
       let newArray = [...cardNumbers]
       newArray[item.id] = newItem
       setCardNumbers(newArray)
+
+      //count logic
+      setSteps(steps + 1)
+
+      //match logic
+      setFlipCount(flipCount + 1)
+      if (flipCount == 0) {
+        setFirstFlippedCard(newItem)
+      }
+
+      if (flipCount === 1) {
+        setSecondFlippedCard(newItem)
+      }
+
+
     }
 
     const renderItem = ({ item }) => (
