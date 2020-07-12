@@ -20,7 +20,6 @@ export const shuffle = (array) => {
 export const createArrayOfNumbers = () => {
     let numbersArray = []
     
-
     while (numbersArray.length < 6) {
         let randomNum = getRandomNumber()
         //check whether number already exist
