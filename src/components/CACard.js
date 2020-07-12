@@ -8,22 +8,14 @@ import {
 } from 'react-native';
 import CAStyles from '../res/CAStyles';
 import CAImages from '../res/CAImages';
+import CAColors from '../res/CAColors';
 
 const CACard = (props ) => {
   const [flipped, setFlipped] = useState(false)
 
-  getBackgroundColor = () => {
-   return flipped ? '#fff' : '#fff'
-  }
-
-  flipCard = () => {
-    //setFlipped(!flipped)
-    props.cardTouched()
-  }
-
   return (
-    <TouchableOpacity onPress={flipCard}>
-        <View style={[styles.cardContainer, CAStyles.ALIGN_CENTER]} width={props.width} height={props.height} backgroundColor={getBackgroundColor()}>
+    <TouchableOpacity onPress={props.cardTouched}>
+        <View style={[styles.cardContainer, CAStyles.ALIGN_CENTER]} width={props.width} height={props.height}>
           
           {
             props.flipped ? (
@@ -47,7 +39,8 @@ const CACard = (props ) => {
 
 const styles = StyleSheet.create({
   cardContainer: { 
-    margin:8
+    margin:8,
+    backgroundColor:CAColors.WHITE
   }, textStyle: {
     fontSize: 32
   }
