@@ -6,7 +6,8 @@ import {
   View,
   Button,
   FlatList,
-  Dimensions
+  Dimensions,
+  Alert
 } from 'react-native';
 import CAColors from '../res/CAColors';
 import CAStrings from '../res/CAStrings';
@@ -74,7 +75,17 @@ const HomeScreen = () => {
         setFlipCount(0)
         //check whether all matched
         if (checkWhetherAllCardsMatched()) {
-          alert("Congratulations you've won")
+          Alert.alert(
+            "WON",
+            `Congratulations on winding the game with just ${steps} steps`,
+            [
+              {
+                text: "Play Again",
+                onPress: () => resetSteps()
+              }
+            ],
+            { cancelable: false }
+          );
         }
       } else {
         //flip back timer
@@ -87,7 +98,10 @@ const HomeScreen = () => {
     flipCardsAsNotMatched = () => {
       let newArray = [...cardNumbers]
       newArray.map((cardItem)=>{
-        cardItem.flipped = false
+        if (firstFlippedCard.id === cardItem.id || secondFlippedCard.id === cardItem.id) {
+          cardItem.flipped = false
+        }
+        
       })
 
       setCardNumbers(newArray)
