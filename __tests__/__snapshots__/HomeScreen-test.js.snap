@@ -142,11 +142,9 @@ exports[`renders correctly CACard 1`] = `
         }
       }
       style={
-        Array [
-          Object {
-            "resizeMode": "stretch",
-          },
-        ]
+        Object {
+          "resizeMode": "stretch",
+        }
       }
     />
   </View>
